@@ -27,7 +27,11 @@ end
 
 X_clean = A * S;
 % Compute corresponding noise power 
-signal_power = mean(abs(X_clean(:)).^2);
+% SNR is defined as signal power at the antenna to noise power per source.
+% Since our steering vectors have unit magnitude elements and signal
+% sources have unit power as well, using one of the source's power is
+% enough to apply desired SNR.
+signal_power = sum(abs(S(1, :)).^2) ./ N;
 SNR = 10^(SNR / 10);
 noise_power = signal_power / SNR;
 % Generate complex gaussian with the noise power
