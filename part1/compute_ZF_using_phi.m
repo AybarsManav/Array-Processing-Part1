@@ -7,6 +7,7 @@ for k = 1:d
     end
 end
 % From S obtain beamformer to isolate A
-W_theta_ZF = (S_structured * pinv(X))';
+A_hat = X * pinv(S_structured);
+W_theta_ZF = (pinv(A_hat))';
 end
 
