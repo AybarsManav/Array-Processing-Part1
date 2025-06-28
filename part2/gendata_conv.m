@@ -14,7 +14,7 @@ function x = gendata_conv(s,P,N,sigma)
     x_clean = conv(s_up, h, "full");
     x_clean = x_clean(1:end - (P - 1));
     
-    noise = sigma/sqrt(2) * (randn(size(x_clean)) + 1j*randn(size(x_clean)));
+    noise = sigma.^2/sqrt(2) * (randn(size(x_clean)) + 1j*randn(size(x_clean)));
     
     x = x_clean + noise;
     

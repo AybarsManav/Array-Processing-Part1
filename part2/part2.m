@@ -24,8 +24,8 @@ s_hat_zf(500) = S_hat_ZF(2,end);
 Rx_hat = cal_X * cal_X' / N;                    % Sample data covariance matrix
 % Since E[SS'] = N * I
 Rxs_hat = H;                                    % Sample correlation between symbols and received data
-W_wiener = inv(Rx_hat) * Rxs_hat;               % If there is noise R_x is invertible
-% W_wiener = inv(H*H' + sigma* eye(2*P,2*P))*H;
+% W_wiener = inv(Rx_hat) * Rxs_hat;               % If there is noise R_x is invertible
+W_wiener = inv(H*H' + sigma.^2 * eye(2*P,2*P))*H;
 S_hat_wiener = W_wiener'*cal_X;                 % Reconstruct S using wiener
 s_hat_wiener = zeros(1,N);
 s_hat_wiener(1:499) = S_hat_wiener(1,:);
@@ -50,7 +50,7 @@ xlabel("Real");
 ylabel("Imag")
 grid on;
 
-sgtitle('Constellations for beamformers (Blue: ZF, Red: Wiener)');
+sgtitle('Constellations for receivers (Blue: ZF, Red: Wiener)');
 
 
 %% Second part with doubled P
@@ -80,8 +80,8 @@ s_hat_zf(500) = S_hat_ZF(2,end);
 Rx_hat = cal_X * cal_X' / N;                    % Sample data covariance matrix
 % Since E[SS'] = N * I
 Rxs_hat = H;                                    % Sample correlation between symbols and received data
-W_wiener = inv(Rx_hat) * Rxs_hat;               % If there is noise R_x is invertible
-% W_wiener = inv(H*H' + sigma* eye(2*P,2*P))*H;
+% W_wiener = inv(Rx_hat) * Rxs_hat;               % If there is noise R_x is invertible
+W_wiener = inv(H*H' + sigma.^2 * eye(2*P,2*P))*H;
 S_hat_wiener = W_wiener'*cal_X;
 s_hat_wiener = zeros(1,N);
 s_hat_wiener(1:499) = S_hat_wiener(1,:);
@@ -105,4 +105,4 @@ xlabel("Real");
 ylabel("Imag")
 grid on;
 
-sgtitle('Constellations for beamformers (Blue: ZF, Red: Wiener)');
+sgtitle('Constellations for receivers (Blue: ZF, Red: Wiener)');
